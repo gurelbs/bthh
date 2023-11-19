@@ -1,7 +1,21 @@
-import { Controller, Get, Optional, Param, Put, Query, Type } from '@nestjs/common';
-import { ApiPropertyOptional, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Optional,
+  Param,
+  Put,
+  Query,
+  Type,
+} from '@nestjs/common';
+import {
+  ApiPropertyOptional,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AppService } from './app.service';
-import { Hostage } from './app.interfaces'
+import { Hostage } from './app.interfaces';
 
 @Controller('persons')
 @ApiTags('persons')
@@ -25,20 +39,25 @@ export class AppController {
   }
 
   @Get(':name/news')
-  @ApiOperation({ summary: 'Get the latest news and updates that mention this person.' })
-  @ApiPropertyOptional({ 
-    name: 'lang', 
+  @ApiOperation({
+    summary: 'Get the latest news and updates that mention this person.',
+  })
+  @ApiPropertyOptional({
+    name: 'lang',
     description: 'language of the news (ISO 639-1)',
     example: '/persons/shem/news',
     examples: [
       { language: 'English', value: 'en' },
       { language: 'Hebrew', value: 'he' },
-      { language: 'French', value: 'fr'},
-      { language: 'German', value: 'de'},
-      'https://www.loc.gov/standards/iso639-2/php/code_list.php'
-    ]
+      { language: 'French', value: 'fr' },
+      { language: 'German', value: 'de' },
+      'https://www.loc.gov/standards/iso639-2/php/code_list.php',
+    ],
   })
-  async getNewsByName(@Param('name') name: string, @Query('lang') lang: string = 'he') {
+  async getNewsByName(
+    @Param('name') name: string,
+    @Query('lang') lang: string = 'he',
+  ) {
     return await this.appService.getNewsByName(name, lang);
   }
 
@@ -52,7 +71,7 @@ export class AppController {
   // getByName(
   //   @Query('name') name: string,
   //   @Optional() @Query('news') news: boolean = false,
-  //   @Optional() @Query('lang') lang: string = 'he' 
+  //   @Optional() @Query('lang') lang: string = 'he'
   // ) {
   //   if (!name || !news || !lang) return this.appService.getByName(name);
   //   if (news) this.appService.getNewsByName(name);

@@ -20,9 +20,7 @@ async function bootstrap() {
   // Set the config options
   const adminConfig: ServiceAccount = {
     projectId: configService.get<string>('projectId'),
-    privateKey: configService
-      .get<string>('apiKey')
-      .replace(/\\n/g, '\n'),
+    privateKey: configService.get<string>('apiKey').replace(/\\n/g, '\n'),
     clientEmail: configService.get<string>('FIREBASE_CLIENT_EMAIL'),
   };
   // Initialize the firebase admin app
