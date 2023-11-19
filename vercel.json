@@ -1,0 +1,8 @@
+{
+ "buildCommand": "npm run build",
+ "devCommand": "npm run start:dev",
+ "framework": "nestjs",
+  "crons": [
+   {"path": "/person", "schedule": "0 * * * *"}
+  ]
+}

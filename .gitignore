@@ -8,3 +8,5 @@ constants.ts
 !.env.project
 !.env.vault
 .env.vault
+
+.vercel
