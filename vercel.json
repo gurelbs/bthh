@@ -1,8 +1,13 @@
 {
  "buildCommand": "npm run build",
  "devCommand": "npm run start:dev",
- "framework": "nestjs",
   "crons": [
-   {"path": "/person", "schedule": "0 * * * *"}
-  ]
+   {"path": "/person", "schedule": "0 0 * * *"}
+  ],
+  "routes": [
+   {
+     "src": "/(.*)",
+     "dest": "dist/main.js"
+   }
+ ]
 }
