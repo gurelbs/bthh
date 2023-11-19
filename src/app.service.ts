@@ -26,15 +26,9 @@ export class AppService {
     const person = this.getByName(name)?.shift();
     if (!person || !new Intl.Locale(lang).baseName) return;
     const language = new Intl.DisplayNames('en', {type: 'language'}).of(lang).toLowerCase();
-    const langNews = this.scrapeNewsByName(person, lang);
-    if (!person.news){
-      person.news = { [language]: await langNews };
-      console.log(person);
-      
-      return person;
+    person.news = {
+      [language]: await this.scrapeNewsByName(person, lang) || []
     }
-    const all = [...new Set([...person.news[language],... await langNews])];
-    person.news[language] === all;
     return person;
   }
 

@@ -21,7 +21,7 @@ async function bootstrap() {
 
   await app
     .useGlobalFilters(new HttpExceptionFilter())
-    .listen(3000, () => table(`NestJS server app with swagger is up and running on http://localhost:3000/api`));
+    .listen(process.env['PORT'] || 3000, () => table(`NestJS server app with swagger is up and running on http://localhost:3000/api`));
 }
 
 bootstrap();

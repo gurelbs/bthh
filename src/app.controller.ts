@@ -39,7 +39,7 @@ export class AppController {
     ]
   })
   async getNewsByName(@Param('name') name: string, @Query('lang') lang: string = 'he') {
-    return this.appService.getNewsByName(name, lang);
+    return await this.appService.getNewsByName(name, lang);
   }
 
   // @Put(':name')
