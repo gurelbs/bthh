@@ -1,7 +1,5 @@
 {
  "version": 2,
- "buildCommand": "npm run build",
- "devCommand": "npm run start:dev",
   "crons": [
    {"path": "/person", "schedule": "0 0 * * *"}
   ],
@@ -14,7 +12,5 @@
       "dest": "src/main.ts",
       "methods": [ "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS" ]
     }
-  ],
-  "outputDirectory": "dist",
-  "public": true
+  ]
 }
