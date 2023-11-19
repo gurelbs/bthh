@@ -11,22 +11,30 @@ export class AppService {
   getAll(): Partial<Hostage>[] {
     return hostages.map((hostage) => ({
       ...hostage,
-      id: randomUUID(),
-      news: { hebrew: [], english: [] },
       urlName: hostage.englishName.toLowerCase().split(' ').join('-'),
+      id: randomUUID(),
     }));
   }
 
   getByName(n: string): Partial<Hostage>[] {
     return this.getAll().filter(
-      ({ name, englishName }) => name.includes(n) || englishName.includes(n),
+      ({ name, englishName }) => name.includes(n) || englishName.toLowerCase().includes(n),
     );
   }
 
-  async getNewsByName(name: string, lang = 'he') {
+  async getNewsByName(name: string, lang: string){
     const person = this.getByName(name)?.shift();
-    if (!person) return;
-    person.news[lang] = await this.scrapeNewsByName(person, lang);
+    if (!person || !new Intl.Locale(lang).baseName) return;
+    const language = new Intl.DisplayNames('en', {type: 'language'}).of(lang).toLowerCase();
+    const langNews = this.scrapeNewsByName(person, lang);
+    if (!person.news){
+      person.news = { [language]: await langNews };
+      console.log(person);
+      
+      return person;
+    }
+    const all = [...new Set([...person.news[language],... await langNews])];
+    person.news[language] === all;
     return person;
   }
 
