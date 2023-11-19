@@ -5,9 +5,9 @@
   "crons": [
    {"path": "/person", "schedule": "0 0 * * *"}
   ],
-  "build": {
-   "src": "src/main.ts", "use": "@vercel/node:"
-  },
+  "builds": [
+   { "src": "src/main.ts", "use": "@vercel/node:"}
+  ],
   "routes": [
     {
       "src": "/(.*)",
