@@ -2,7 +2,10 @@
   "name": "api",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Gurel Ben Shabat",
+  "repository": {
+    "url": "https://github.com/gurelbs/bthh-api"
+  },
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
