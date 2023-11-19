@@ -1,3 +1,10 @@
 node_modules
 dist
 .vercel
+constants.ts
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
+.env.vault
