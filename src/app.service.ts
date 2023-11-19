@@ -8,19 +8,20 @@ import { URL } from 'url';
 
 @Injectable()
 export class AppService {
-  getAll() {
-    return hostages.map( hostage => ({
+  getAll(): Partial<Hostage>[] {
+    return hostages.map((hostage) => ({
       ...hostage,
       id: randomUUID(),
-      news:  { hebrew: [], english: [] },
-      urlName: hostage.englishName.toLowerCase().split(' ').join('-')
-    }))
+      news: { hebrew: [], english: [] },
+      urlName: hostage.englishName.toLowerCase().split(' ').join('-'),
+    }));
   }
 
-  getByName(n: string) {
-    return this.getAll().filter(({name, englishName}) => name.includes(n) || englishName.includes(n));
+  getByName(n: string): Partial<Hostage>[] {
+    return this.getAll().filter(
+      ({ name, englishName }) => name.includes(n) || englishName.includes(n),
+    );
   }
-
 
   async getNewsByName(name: string, lang = 'he') {
     const person = this.getByName(name)?.shift();
@@ -29,37 +30,41 @@ export class AppService {
     return person;
   }
 
-  private getLink(x:HTMLElement){
+  private getLink(x: HTMLElement) {
     const link = x.querySelector('a')?.href;
     if (!link) return;
     const url = new URL(link);
-    const decoded  = url.pathname.replace('/articles/', '');
+    const decoded = url.pathname.replace('/articles/', '');
     const encoded = btoa(decoded);
     return encoded;
   }
 
-  private async scrapeNewsByName(person: Partial<Hostage>, lang: string = 'he'): Promise<News[]> {
+  private async scrapeNewsByName(
+    person: Partial<Hostage>,
+    lang: string = 'he',
+  ): Promise<News[]> {
     try {
       const browser = await puppeteer.launch({ headless: false });
       const [page] = await browser.pages();
-        await page.goto(`https://news.google.com/home?hl=${lang}`, { waitUntil: 'networkidle0' });
-        const name = lang !== 'he' ? person.englishName : person.name;
-        await page.type('[type="text"]', name);
-        await page.keyboard.press('Enter');
-    
-        const data = await page.$$eval('article', (articles) => {
-          return articles.map((article) => ({
-            title: article.querySelector('h3 a')?.textContent,
-            link: article.querySelector('a').href,
-            time: article.querySelector('time')?.textContent,
-            img: article.querySelector('img')?.src,
-          }));
-        });
+      await page.goto(`https://news.google.com/home?hl=${lang}`, {
+        waitUntil: 'networkidle0',
+      });
+      const name = lang !== 'he' ? person.englishName : person.name;
+      await page.type('[type="text"]', name);
+      await page.keyboard.press('Enter');
 
-        await page.close();
-        await browser.close();
-        return data;
+      const data = await page.$$eval('article', (articles) => {
+        return articles.map((article) => ({
+          title: article.querySelector('h3 a')?.textContent,
+          link: article.querySelector('a').href,
+          time: article.querySelector('time')?.textContent,
+          img: article.querySelector('img')?.src,
+        }));
+      });
 
+      await page.close();
+      await browser.close();
+      return data;
     } catch (error) {
       console.error(error.message);
     }

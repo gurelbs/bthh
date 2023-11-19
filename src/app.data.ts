@@ -901,10 +901,10 @@ export const hostages: Partial<Hostage>[] = [
     tag: 'נחטף מהמסיבה ברעים',
     img: 'https://cfcdn.kan.org.il/media/ql3hysd3/רוני-קריבוי-פייסבוק.png',
     englishName: 'Roni Krivoi',
-   },
-   {
+  },
+  {
     name: 'עדינה משה',
-    englishName: 'Moshe Adina',    
+    englishName: 'Moshe Adina',
     age: '72',
     address: ' ניר עוז',
     tag: 'נחטפה מקיבוץ ניר עוז',
@@ -1492,8 +1492,8 @@ export const hostages: Partial<Hostage>[] = [
     tag: 'נחטפה מקיבוץ ניר יצחק',
     img: 'https://cfcdn.kan.org.il/media/z4wlmsmj/מייה-ליימברג-פייסבוק.png',
     link: 'https://www.kan.org.il/content/kan/special-sections/p-571459/573749/',
-   },
-   {
+  },
+  {
     name: 'גבריאלה ליימברג',
     englishName: 'Gabriela Mia',
     age: '59',
@@ -1566,7 +1566,6 @@ export const hostages: Partial<Hostage>[] = [
     link: 'https://www.kan.org.il/content/kan/special-sections/p-571459/573746/',
   },
 ];
-
 
 console.log(hostages.length);
 

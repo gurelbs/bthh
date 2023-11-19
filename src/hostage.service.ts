@@ -1,7 +1,6 @@
-
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
-import { Hostage, CreatePersonDto } from './app.interfaces'
+import { Hostage, CreatePersonDto } from './app.interfaces';
 
 @Injectable()
 export class HostageService {

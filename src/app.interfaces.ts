@@ -1,8 +1,9 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
+import { UUID } from 'crypto';
 
 export class CreatePersonDto {
-  @ApiProperty() name: string; 
+  @ApiProperty() name: string;
   @ApiProperty() englishName: string;
   @ApiProperty() age: number;
 }
@@ -15,7 +16,7 @@ export interface News {
 }
 
 export interface Hostage extends Document {
-  id: string;
+  id: UUID;
   name: string;
   englishName: string;
   age: string;
@@ -24,8 +25,8 @@ export interface Hostage extends Document {
   img: string;
   urlName: string;
   link?: string;
-  news?: {
+  news: {
     hebrew: News[];
     english: News[];
-  }
+  };
 }

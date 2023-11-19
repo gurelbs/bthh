@@ -1,29 +1,46 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
+
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private appService: AppService) {}
 
-  @Get()
-  getAll() {
-    return this.appService.getAll();
-  }
-
-  @Get(':name')
+  @Get('/:name')
   getByName(@Param('name') name: string) {
-    console.log(name);
-    return this.appService.getByName(name);
+    const result = this.appService.getByName(name);
+    if (!result) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+    return result;
   }
 
-  @Get([':name/news'])
+  @Get('/:name/news')
   getNewsByName(@Param('name') name: string) {
-    return this.appService.getNewsByName(name);
+    const result = this.appService.getNewsByName(name);
+    if (!result) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+    return result;
   }
 
-  @Get([':name/news/:lang'])
+  @Get('/:name/news/:lang')
   getNewsByLang(@Param('name') name: string, @Param('lang') lang: string) {
-    return this.appService.getNewsByName(name, lang);
+    const result = this.appService.getNewsByName(name, lang);
+    if (!result) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+    return result;
   }
 
+  @Get('*')
+  notFound() {
+    throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+  }
 }
