@@ -1,15 +1,14 @@
 {
  "version": 2,
-  "crons": [
-   {"path": "/person", "schedule": "0 0 * * *"}
-  ],
+ "buildCommand": "npm run build",
+ "devCommand": "npm run start:dev",
   "builds": [
-   { "src": "dist/main.js", "use": "@vercel/node"}
+   { "src": "src/main.ts", "use": "@vercel/node"}
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/dist.js",
+      "dest": "src/main.ts",
       "methods": [ "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS" ]
     }
   ]
