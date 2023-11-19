@@ -12,8 +12,5 @@
     }
   ],
   "outputDirectory": "dist",
-  "public": true,
-  "redirects": [
-   { "source": "/", "destination": "/api", "permanent": false }
- ]
+  "public": true
 }
