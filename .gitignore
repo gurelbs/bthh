@@ -1,4 +1,4 @@
-node_modules
+node_modules/
 dist
 .vercel
 constants.ts
@@ -16,6 +16,4 @@ lib/**/*.js.map
 
 # TypeScript v1 declaration files
 typings/
-
-# Node.js dependency directory
-node_modules/
+package-lock.json
