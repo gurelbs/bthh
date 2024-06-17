@@ -1,21 +1,11 @@
-import {
-  Controller,
-  Get,
-  Optional,
-  Param,
-  Put,
-  Query,
-  Type,
-} from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import {
   ApiPropertyOptional,
   ApiOperation,
-  ApiParam,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { AppService } from './app.service';
-import { Hostage } from './app.interfaces';
 
 @Controller('persons')
 @ApiTags('persons')
