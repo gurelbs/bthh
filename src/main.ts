@@ -6,11 +6,9 @@ import {
 } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './http-exception.filter';
-import { config as dotenv } from 'dotenv';
 import { table } from 'console';
 
 async function bootstrap() {
-  dotenv();
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle('Israeli Hostages API')

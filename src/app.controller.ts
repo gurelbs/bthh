@@ -7,7 +7,7 @@ import {
 } from '@nestjs/swagger';
 import { AppService } from './app.service';
 
-@Controller('persons')
+@Controller()
 @ApiTags('persons')
 export class AppController {
   constructor(private appService: AppService) {}
